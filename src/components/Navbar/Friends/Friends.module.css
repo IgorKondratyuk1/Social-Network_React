@@ -1,0 +1,46 @@
+.nav {
+    grid-area: nav;
+    background-color: burlywood;
+    padding: 15px;
+}
+
+.title {
+    font-size: 30px;
+    color: #ffffff;
+}
+
+
+.item a {
+    color: white;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: peru;
+}
+
+
+.friends_block {
+    margin-top: 20px;
+}
+
+.friends_items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.friend_item {
+    width: 70px;
+}
+
+.friend_item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.friend_name {
+    color: #ffffff;
+}
+
+
