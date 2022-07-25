@@ -1,26 +1,14 @@
-.dialogs{
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    padding: 10px;
+.dialog_photo {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
 }
 
-.dialogs_items{
-    padding: 10px;
-}
-
-.dialog a{
+.dialog a {
     text-decoration: none;
     color: white;
 }
 
-.dialog.active {
+.dialog a.activeLink {
     color: lightseagreen;
-}
-
-.messages_items{
-    padding: 10px;
-}
-
-.message{
-
 }

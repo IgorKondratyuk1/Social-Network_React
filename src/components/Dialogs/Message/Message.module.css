@@ -1,26 +1,15 @@
-.dialogs{
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    padding: 10px;
+.message {
+    padding: 5px;
+    border-radius: 7px;
+    background-color: bisque;
+    margin: 5px 0;
 }
 
-.dialogs_items{
-    padding: 10px;
+.message.right {
+    align-self: flex-end;
 }
 
-.dialog a{
-    text-decoration: none;
-    color: white;
+.message.left {
+    align-self: flex-start;
 }
 
-.dialog.active {
-    color: lightseagreen;
-}
-
-.messages_items{
-    padding: 10px;
-}
-
-.message{
-
-}

@@ -1,0 +1,19 @@
+.send_message {
+    grid-area: message_area;
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+    border: 1px solid grey;
+}
+
+.send_message textarea {
+    height: 100px;
+    width: 400px;
+}
+
+.send_message button {
+    height: 50px;
+    width: 50px;
+    border-radius: 30%;
+    margin: 0 10px;
+}
