@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { login } from "../../redux/authReducer";
 import { Input, FormControl } from "../common/FormsControls/FormControls";
 import { validateEmail, validatePassword } from "../../utils/validator/validator";
+import s from "./LoginForm.module.css";
 
 const LoginForm = (props) => {
 
-    const loginFormSubmit = (values, { setSubmitting }) => {
-        //console.log(JSON.stringify(values));
-        props.login(values.email, values.password, values.rememberMe, false);
+    const loginFormSubmit = (values, { setSubmitting, setStatus }) => {
+        props.login(values.email, values.password, values.rememberMe, setStatus);
         setSubmitting(false);
     }
 
@@ -20,8 +20,8 @@ const LoginForm = (props) => {
             validateOnChange={false}
             onSubmit={loginFormSubmit}
         >
-            {({ isSubmitting }) => (
-                <Form>
+            {({ errors, isSubmitting, status }) => 
+                (<Form>
                     <div>
                         Login
                         <Field component={Input} typeField="input" name="email" type="email" placeholder="email" validate={validateEmail} />
@@ -34,6 +34,13 @@ const LoginForm = (props) => {
                         Remember me
                         <Field component={Input} type="checkbox" name="rememberMe"/>
                     </div>
+                    {
+                        status ? 
+                        <div className={s.form_error_message}>
+                            {status}
+                        </div>
+                        : null
+                    }
                     <button type="submit" disabled={isSubmitting}>
                         Login
                     </button>
