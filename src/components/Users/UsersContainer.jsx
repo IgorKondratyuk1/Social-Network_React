@@ -1,21 +1,22 @@
 import React from 'react';
 import { connect } from "react-redux";
 import UsersAPIComponent from './UsersAPIComponent';
-import {follow, unfollow, setCurrentPage, getUsers} from "../../redux/usersReducer";
+import {follow, unfollow, setCurrentPage, requestUsers} from "../../redux/usersReducer";
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { getUsers, getPageSize, getFollowingInProcess, getCurrentPage, getIsFetching, getTotalUsersCount } from '../../redux/userSelector';
 
 const mapStateToProps = (state) => ({
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProcess: state.usersPage.followingInProcess
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProcess: getFollowingInProcess(state)
 });
 
 export default compose(
-    connect(mapStateToProps, { follow, unfollow, setCurrentPage, getUsers }),
+    connect(mapStateToProps, { follow, unfollow, setCurrentPage, requestUsers }),
     withAuthRedirect
 )(UsersAPIComponent);
 
