@@ -3,8 +3,10 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import PostForm from "./PostForm/PostForm";
 
-const MyPosts = (props) => {
-    const postsElements = props.posts.map( p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>);
+const MyPosts = React.memo(function (props){
+    const postsElements = [...props.posts]
+                            .reverse() 
+                            .map( p => <Post key={p.id} likesCount={p.likesCount} message={p.message}/>);
 
     return (
         <div className={s.posts_block}>
@@ -15,6 +17,6 @@ const MyPosts = (props) => {
             </div>
         </div>
     );
-}
+});
 
 export default MyPosts;

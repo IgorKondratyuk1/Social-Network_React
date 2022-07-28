@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userImg from "../../../assets/images/user.png";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -19,7 +20,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.large ? props.profile.photos.large : userImg} alt="mainPhoto" />
                 <div>
                     <div>{props.profile.fullName}</div>
-                    <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
+                    <ProfileStatusHooks status={props.status} updateUserStatus={props.updateUserStatus} />
                     <div>{props.profile.lookingForAJob ? "I`m looking for a job. Description: " + props.profile.lookingForAJobDescription : "I`m not looking for a job."}</div>
                     <div>{props.profile.contacts.facebook}</div>
                 </div>
