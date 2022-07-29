@@ -10,10 +10,10 @@ function getStyles(errors, fieldName) {
     }
 }
 
-export const FormControl = ({ field, form: { errors }, ...props }) => {
+export const FormControl = ({ field, form: { errors }, children,...props }) => {
     return (
         <div className={s.form_control + " " + getStyles(errors, field.name)}>
-            { props.children }
+            { children }
             <div className={s.error_message}>
                 <ErrorMessage name={field.name} />
             </div>
@@ -21,11 +21,11 @@ export const FormControl = ({ field, form: { errors }, ...props }) => {
 }
 
 export const Textarea = (props) => {
-    const { field, form: { errors }, ...restProps } = props;
+    const { field, form: { errors } } = props;
     return <FormControl {...props}><textarea {...field} className={getStyles(errors, field.name)} placeholder={props.placeholder ? props.placeholder : ""} /></FormControl>
 }
 
 export const Input = (props) => {
-    const { field, form: { errors }, ...restProps } = props;
+    const { field, form: { errors } } = props;
     return <FormControl {...props}><input {...field} className={getStyles(errors, field.name)} placeholder={props.placeholder ? props.placeholder : ""} type={props.type ? props.type : "text"}/></FormControl>
 }

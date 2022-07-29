@@ -1,9 +1,9 @@
 import { profileAPI } from "../api/api";
 
-const ADD_POST = "ADD_POST";
-const DELETE_POST = "DELETE_POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_USER_STATUS = "SET_USER_STATUS";
+const ADD_POST = "social-network/app/ADD_POST";
+const DELETE_POST = "social-network/app/DELETE_POST";
+const SET_USER_PROFILE = "social-network/app/SET_USER_PROFILE";
+const SET_USER_STATUS = "social-network/app/SET_USER_STATUS";
 
 let initState = {
     posts: [
@@ -16,7 +16,6 @@ let initState = {
 };
 
 const profileReducer = (state = initState, action) => {
-
     switch (action.type) {
         case ADD_POST: 
             let newPost = {
@@ -24,7 +23,6 @@ const profileReducer = (state = initState, action) => {
                 message: action.text, 
                 likesCount: 100
             };
-
             return {
                 ...state,
                 posts: [...state.posts, newPost]
@@ -50,41 +48,25 @@ const profileReducer = (state = initState, action) => {
 }
 
 export const getUserProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response));
-            })
-            .catch(error => {
-                console.log("Error: " + error);
-            });
+    return async (dispatch) => {
+        let response = await profileAPI.getProfile(userId)
+        dispatch(setUserProfile(response));
     }
 }
 
 export const getUserStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response.data));
-            })
-            .catch(error => {
-                console.log("Error: " + error);
-            });
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setUserStatus(response.data));
     }
 }  
 
 export const updateUserStatus = (status) => {
-    return (dispatch) => {
-        debugger;
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(setUserStatus(status));
-                }
-            })
-            .catch(error => {
-                console.log("Error: " + error);
-            });
+    return async (dispatch) => {
+        let response = await profileAPI.updateStatus(status)
+        if (response.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
     }
 }  
 

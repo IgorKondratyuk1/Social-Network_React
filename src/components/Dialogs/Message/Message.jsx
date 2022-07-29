@@ -6,9 +6,9 @@ const myId = 1,
       friendId = 2;
 // ------------
 
-const Message = (props) => {
+const Message = ({userId, message}) => {
     return (
-        <div className={props.userId === myId ? s.message + " " + s.right : s.message+ " " + s.left }>{props.message}</div>
+        <div className={userId === myId ? s.message + " " + s.right : s.message+ " " + s.left }>{message}</div>
     )
 }
 

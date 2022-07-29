@@ -9,7 +9,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { initializeApp } from "./redux/appReducer";
@@ -31,6 +31,7 @@ class App extends React.Component {
                 <NavbarContainer />
                 <div className="app-wrapper-content">
                     <Routes>
+                        <Route path="/" element={<Navigate to={"/profile"} />} />
                         <Route path="/profile/">
                             <Route path=":userId" element={<ProfileContainer />} />
                             <Route path="" element={<ProfileContainer />} />

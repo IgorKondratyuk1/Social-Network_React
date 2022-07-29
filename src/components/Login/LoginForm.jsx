@@ -2,14 +2,14 @@ import React from "react";
 import { Formik, Field, Form } from 'formik';
 import { connect } from "react-redux";
 import { login } from "../../redux/authReducer";
-import { Input, FormControl } from "../common/FormsControls/FormControls";
+import { Input } from "../common/FormsControls/FormControls";
 import { validateEmail, validatePassword } from "../../utils/validator/validator";
 import s from "./LoginForm.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = ({login}) => {
 
     const loginFormSubmit = (values, { setSubmitting, setStatus }) => {
-        props.login(values.email, values.password, values.rememberMe, setStatus);
+        login(values.email, values.password, values.rememberMe, setStatus);
         setSubmitting(false);
     }
 
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
             validateOnChange={false}
             onSubmit={loginFormSubmit}
         >
-            {({ errors, isSubmitting, status }) => 
+            {({ isSubmitting, status }) => 
                 (<Form>
                     <div>
                         Login

@@ -1,4 +1,4 @@
-const SEND_MESSAGE = "SEND-MESSAGE";
+const SEND_MESSAGE = "social-network/app/SEND-MESSAGE";
 
 let initState = {
     dialogs: [
@@ -17,14 +17,12 @@ let initState = {
 
 const dialogsReducer = (state = initState, action) => {
     switch (action.type) {
-
         case SEND_MESSAGE: {
             let newMessage = {
                 id: 3, 
                 message: action.text, 
                 userId: 1
             };
-
             return {
                 ...state,
                 messages: [...state.messages, newMessage]

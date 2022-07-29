@@ -1,0 +1,16 @@
+.user {
+    display: flex;
+    padding: 10px;
+    margin: 5px; 
+    border: 1px solid black;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.user_photo {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 100%;
+}
