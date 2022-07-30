@@ -2,7 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userImg from "../../../assets/images/user.png";
-import ProfileStatusHooks from "./ProfileStatusHooks";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = ({profile, status, updateUserStatus}) => {
     if (!profile) {
@@ -19,7 +19,7 @@ const ProfileInfo = ({profile, status, updateUserStatus}) => {
                 <img src={profile.photos.large ? profile.photos.large : userImg} alt="mainPhoto" />
                 <div>
                     <div>{profile.fullName}</div>
-                    <ProfileStatusHooks status={status} updateUserStatus={updateUserStatus} />
+                    <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
                     <div>{profile.lookingForAJob ? "Looking for a job. Description: " + profile.lookingForAJobDescription : "Not looking for a job."}</div>
                     <div>{profile.contacts.facebook}</div>
                 </div>

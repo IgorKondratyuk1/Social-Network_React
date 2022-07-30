@@ -1,8 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import SocialNetworkApp from './App';
+import ProfileStatus from './components/Profile/ProfileInfo/ProfileStatus';
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  render(<SocialNetworkApp />);
+});
+
+describe("Profile Component", () => {
+  test("status from props should be in state", () => {
+    render(<ProfileStatus status="123" />);
+    const statusElem = screen.getByText(/123/i);
+    expect(statusElem).toBeInTheDocument();
+  });
 });

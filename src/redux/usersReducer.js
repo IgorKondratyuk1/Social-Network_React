@@ -11,7 +11,7 @@ const SET_FOLLOWING_IN_PROCESS = "social-network/app/SET_FOLLOWING_IN_PROCESS";
 
 let initState = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,

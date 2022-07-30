@@ -9,11 +9,12 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, BrowserRouter as Router, Routes} from "react-router-dom";
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { initializeApp } from "./redux/appReducer";
 import Preloader from './components/common/Preloader/Preloader';
+import store from "./redux/reduxStore";
 
 class App extends React.Component {
     componentDidMount() {
@@ -57,6 +58,20 @@ const mapStateToProps = (state) => {
     });
 }
 
-export default compose(
+let AppContainer = compose(
     connect(mapStateToProps, { initializeApp })
 )(App);
+
+const SocialNetworkApp = () => {
+    return (    
+        <Router>
+            <React.StrictMode>
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+            </React.StrictMode>
+        </Router>
+    );
+}
+
+export default SocialNetworkApp;
