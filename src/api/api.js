@@ -7,7 +7,7 @@ const instance = axios.create({
         "API-KEY": `${process.env.REACT_APP_API_KEY}`
     }
 });
-//
+
 export const usersAPI = {
     getUsers(page, pageSize) {
         return instance.get(`users?page=${page}&count=${pageSize}`)
@@ -32,8 +32,8 @@ export const authAPI = {
         return instance.get(`auth/me`)
                 .then(response => response.data)
     },
-    authorizeUser(email, password, rememberMe = false) {
-        return instance.post('auth/login', {email, password, rememberMe})
+    authorizeUser(email, password, rememberMe = false, captcha = null) {
+        return instance.post('auth/login', {email, password, rememberMe, captcha})
     },
     unauthorizeUser() {
         return instance.delete('auth/login')
@@ -65,6 +65,12 @@ export const profileAPI = {
     saveProfileData(profile) {
         return instance.put('/profile', profile)
                 .then(response => response.data)
-                .catch(error => {console.log(error)});
     } 
+}
+
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get('/security/get-captcha-url')
+                .then(response => response.data)
+    }
 }

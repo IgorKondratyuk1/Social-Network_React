@@ -1,21 +1,19 @@
 import React from "react";
 import { Formik, Field, Form } from 'formik';
-import { connect } from "react-redux";
-import { login } from "../../redux/authReducer";
 import { Input } from "../common/FormsControls/FormControls";
-import { validateEmail, validatePassword } from "../../utils/validator/validator";
+import { validateEmail, validatePassword, required } from "../../utils/validator/validator";
 import s from "./LoginForm.module.css";
 
-const LoginForm = ({login}) => {
+const LoginForm = ({isAuth, login, captchaUrl}) => {
 
     const loginFormSubmit = (values, { setSubmitting, setStatus }) => {
-        login(values.email, values.password, values.rememberMe, setStatus);
+        login(values.email, values.password, values.rememberMe, values.captcha, setStatus);
         setSubmitting(false);
     }
 
     return (
         <Formik
-            initialValues={{ email: '', password: '', rememberMe: false }}
+            initialValues={{ email: '', password: '', captcha: '', rememberMe: false }}
             validateOnBlur={false}
             validateOnChange={false}
             onSubmit={loginFormSubmit}
@@ -41,6 +39,14 @@ const LoginForm = ({login}) => {
                         </div>
                         : null
                     }
+                    {
+                        captchaUrl && 
+                        <div>
+                            <img src={captchaUrl} alt="captcha" />
+                            Captcha
+                            <Field component={Input} typeField="input" name="captcha" type="text" placeholder="captcha" validate={required} />
+                        </div>
+                    }
                     <button type="submit" disabled={isSubmitting}>
                         Login
                     </button>
@@ -50,8 +56,4 @@ const LoginForm = ({login}) => {
     )
 }
 
-let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
-});
-
-export default connect(mapStateToProps, { login })(LoginForm);
+export default LoginForm;

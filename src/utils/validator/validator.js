@@ -38,7 +38,7 @@ export const requiredValidator = (maxLength, minLength) => {
 export const required = (value) => {
   if (!value) {
     return 'Required';
-  } else if (value.length < 5) {
+  } else if (value.length < 2) {
     return 'Length too low';
   }
   return undefined;
