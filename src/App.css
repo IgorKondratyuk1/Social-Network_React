@@ -7,10 +7,11 @@
   gap: 10px;
   grid-template-areas: 
   "header header"
-  "nav cont";
+  "nav app-content";
 }
 
 .app-wrapper-content {
-  grid-area: cont;
+  grid-area: app-content;
   background-color: lightsalmon;
+  padding-bottom: 20px;
 }

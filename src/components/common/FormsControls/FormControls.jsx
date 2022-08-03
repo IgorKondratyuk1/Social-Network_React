@@ -26,6 +26,6 @@ export const Textarea = (props) => {
 }
 
 export const Input = (props) => {
-    const { field, form: { errors } } = props;
-    return <FormControl {...props}><input {...field} className={getStyles(errors, field.name)} placeholder={props.placeholder ? props.placeholder : ""} type={props.type ? props.type : "text"}/></FormControl>
+    const { field, form: { errors }, value } = props;
+    return <FormControl {...props}><input {...field} className={getStyles(errors, field.name)} placeholder={props.placeholder ? props.placeholder : ""} type={props.type ? props.type : "text"} /></FormControl>
 }

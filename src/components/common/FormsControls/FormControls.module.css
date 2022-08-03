@@ -15,3 +15,8 @@
 .form_control .error_message {
     color: red;
 }
+
+.form_error_message {
+    border: 2px solid crimson;
+    color: crimson;
+}

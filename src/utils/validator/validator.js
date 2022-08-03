@@ -22,6 +22,19 @@ export const LoginValidationSchema = (minValue, maxValue) => {
     });
 }
 
+export const requiredValidator = (maxLength, minLength) => {
+  return (value) => {
+    if (!value) {
+      return 'Required';
+    } else if (value.length < minLength) {
+      return 'Too short';
+    } else if (value.length > maxLength) {
+      return 'Too long';
+    }
+    return undefined;
+  }
+}
+
 export const required = (value) => {
   if (!value) {
     return 'Required';

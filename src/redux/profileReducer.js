@@ -6,6 +6,8 @@ const SET_USER_PROFILE = "social-network/app/SET_USER_PROFILE";
 const SET_USER_STATUS = "social-network/app/SET_USER_STATUS";
 const SAVE_PHOTO_SUCCESS = "social-network/app/SAVE_PHOTO_SUCCESS";
 
+const SAVE_PROFILE_SUCCESS = "social-network/app/SAVE_PROFILE_SUCCESS";
+
 let initState = {
     posts: [
         {id: 1, message: "Hello it's my first post", likesCount: 12},
@@ -48,6 +50,11 @@ const profileReducer = (state = initState, action) => {
                 ...state,
                 profile: {...state.profile, photos: action.photos }
             }
+        case SAVE_PROFILE_SUCCESS:
+                return {
+                    ...state,
+                    profile: action.profile 
+                }
         default:
             return state;
     }
@@ -55,7 +62,7 @@ const profileReducer = (state = initState, action) => {
 
 export const getUserProfile = (userId) => {
     return async (dispatch) => {
-        let response = await profileAPI.getProfile(userId)
+        let response = await profileAPI.getProfile(userId);
         dispatch(setUserProfile(response));
     }
 }
@@ -79,9 +86,23 @@ export const updateUserStatus = (status) => {
 export const savePhoto = (photo) => {
     return async (dispatch) => {
         let response = await profileAPI.savePhoto(photo);
-        debugger;
         if (response.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.photos));
+        }
+    }
+}
+
+export const saveProfileData = (profile, setStatus) => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.id;
+        let response = await profileAPI.saveProfileData(profile);
+
+        if (response.resultCode === 0) {
+            dispatch(getUserProfile(userId));
+        }  else {
+            let errorMessage = (response.messages && response.messages.length > 0) ? response.messages.join("; ") : "Some error ocurred";
+            setStatus(errorMessage);
+            return Promise.reject(errorMessage);
         }
     }
 }
@@ -91,4 +112,5 @@ export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+export const saveProfileSuccess = (profile) => ({type: SAVE_PROFILE_SUCCESS, profile});
 export default profileReducer;
