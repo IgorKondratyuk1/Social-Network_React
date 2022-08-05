@@ -34,9 +34,9 @@ class App extends React.Component {
                     <Suspense fallback={<Preloader />}>
                         <Routes>
                             <Route path="/" element={<Navigate to={"/profile"} />} />
-                            <Route path="/profile/">
+                            <Route path="/profile">
+                                <Route index element={<ProfileContainer />} />
                                 <Route path=":userId" element={<ProfileContainer />} />
-                                <Route path="" element={<ProfileContainer />} />
                             </Route>
                             <Route path="/dialogs/*" element={<DialogsContainer />} />
                             <Route path="/news" element={<News />} />
@@ -44,13 +44,13 @@ class App extends React.Component {
                             <Route path="/settings" element={<Settings />} />
                             <Route path="/users" element={<UsersContainer />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="*" element={<div>404</div>} />
                         </Routes>
                     </Suspense>
                 </div>
             </div>
         );
     }
-    
 }
 
 const mapStateToProps = (state) => {
